@@ -1,18 +1,7 @@
-#!/bin/bash
-
-# Update and install Nginx
-sudo apt-get update
-sudo apt-get -y install nginx
-
-# Configure Nginx to listen on port 80
-sudo sed -i 's/^\s*listen\s*80\s*;/listen 80;/g' /etc/nginx/sites-available/default
-
-# Restart Nginx without using systemctl
-sudo kill -s HUP $(cat /var/run/nginx.pid)
-
-# Create a default HTML page with the specified content
-echo "Holberton School for the win!" | sudo tee /var/www/html/index.html > /dev/null
-
-# Output success message
-echo "Nginx has been installed and configured successfully."
-
+#!/usr/bin/env bash
+# installs nginx on a remote server and configures it
+sudo apt update
+sudo apt install nginx -y
+sudo touch /var/www/html/index.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
+sudo service nginx start
